@@ -22,6 +22,7 @@ html{
 }
 
 .navbar{
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,6 +206,10 @@ html{
 
 
 .thumbnail{
+   
+    /*25/2 edition*/
+    animation: img-up 6s linear infinite;
+    /**/
     padding: 0px 24px;
 }
 .thumbnail img{
@@ -216,9 +221,14 @@ html{
 }
 
 .thumbnail2{
-    background-color: rgb(244, 244, 244);
-   
+    background-color: rgb(244, 244, 244); 
 }
+
+/**/
+/* .z-index-solution{
+    z-index: 0;
+} */
+/**/
 
 .contact{
     background-color:rgb(244, 244, 244); 
@@ -287,8 +297,31 @@ html{
     }
 }
 
+
+
 /**/
 
+/* 25/2 edition edition*/
+@keyframes img-up{
+    0%{
+        transform: translateY(0px);
+    }
+    25%{
+        transform: translateY(-20px);
+    }
+    50%{
+        transform: translateY(0px);
+    }
+    75%{
+        transform: translateY(20px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+
+/**/
 
 
 
