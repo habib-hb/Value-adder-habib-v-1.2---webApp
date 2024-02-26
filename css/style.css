@@ -124,6 +124,11 @@ html{
     font-size: 18px;
 }
 
+#text-coded{
+    animation: text-color-animation 0.2s linear infinite;
+
+}
+
 .buttons {
     margin-left: -4px;
     margin-top: 8px;
@@ -321,7 +326,33 @@ html{
 }
 
 
-/**/
+/* 26.2 2024 edition */
+@keyframes text-color-animation{  /*affecting "text-coded" id*/
+    0%{
+        background: -webkit-linear-gradient(#eee, #333);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    25%{
+        background: -webkit-linear-gradient(#eeeeeea8, #333333c3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    50%{
+        background: -webkit-linear-gradient(#333, #eee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    75%{
+        background: -webkit-linear-gradient(#eeeeeea8, #333333c3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    100%{
+        background: -webkit-linear-gradient(#eee, #333);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
 
-
-
+/*end*/
