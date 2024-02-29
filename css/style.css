@@ -76,6 +76,12 @@ html{
     background-blend-mode: darken;
 }
 
+.h1-reasons{
+
+    text-align: center;
+    margin-top: 16px;
+}
+
 .firstSection{
     height: 100vh;
 }
