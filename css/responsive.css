@@ -103,6 +103,22 @@
 
 /*end*/
 
+/*4/3 edition*/
+#galary-img-container div{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    
+    margin : 2px 4px;
+    text-align: center;
+    border: 1px solid #212121;
+    border-radius: 8px;
+    align-items: center;
+}
+
+
+/*end*/
+
     .paras{
         padding: 2px;
     }
