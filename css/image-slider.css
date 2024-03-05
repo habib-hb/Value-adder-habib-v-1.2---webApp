@@ -5,7 +5,7 @@
   max-width: 50%;
   /* max-height: 80vh; */
   position: relative;
-  margin: auto;
+  margin: 16px auto 0px auto;
 }
 
 /* Hide the images by default */
@@ -65,7 +65,7 @@
   cursor: pointer;
   height: 15px;
   width: 15px;
-  margin: 0 2px;
+  margin: 0 2px 16px 2px;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;

@@ -42,7 +42,7 @@ html{
 
 .nav-list li{
     list-style-type: none;
-    padding: 26px 30px;
+    padding: 8px 30px;
 }
 
 .nav-list li a{
@@ -159,6 +159,20 @@ html{
     border: 2px solid rgb(62, 62, 62);
     transition: all 0.3s ease-out;
 }
+
+/*5/3 edition*/
+
+/* .btn a{
+    text-decoration: none;
+    color: white;
+}
+
+.btn a:hover{
+    text-decoration: none;
+    color: rgb(19, 19, 19);
+} */
+
+/*end*/
 
 .btn-dark{
     color: black;
