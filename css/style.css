@@ -119,12 +119,18 @@ html{
 
 .secondHalf img{
     width:70%;
-    border: 8px solid white;
+    border: 24px solid white;
     border-radius: 150px;
     display: block;
     margin:auto;
     /*mix-blend-mode: color-dodge;*/
 }
+
+/*22/2 2024 edition*/
+#img-rotate{
+    animation: img-rotate 10s ease-in-out infinite;
+}
+
 
 .text-big{
     font-size: 41px;
@@ -333,7 +339,7 @@ html{
     font-size: 35px;
 }
 
-.form{
+#form{
     max-width: 62%;
     margin: 24px auto;
     margin-bottom: 0px;
@@ -374,10 +380,7 @@ html{
 }
 
 
-/*22/2 2024 edition*/
-#img-rotate{
-    animation: img-rotate 10s ease-in-out infinite;
-}
+
 
 @keyframes img-rotate{
     0%{
