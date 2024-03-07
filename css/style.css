@@ -355,6 +355,13 @@ html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.single-comments{
+    color: rgb(31, 43, 213);
+    text-align: center;
+    padding: 8px 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .text-footer{
     text-align: center;
     padding: 10px 0;

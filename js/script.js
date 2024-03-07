@@ -28,7 +28,7 @@ setInterval(()=>{
         storedComments.forEach((comment , i)=>{
         let newP= document.createElement('p');
          newP.classList.add('comment-p');
-         newP.textContent=`Commenter No.${i}: ${comment.name}---;`
+         newP.innerHTML=`<p class="single-comments">Commenter No.${i}: ${comment.name}---;</p>`
          comments.appendChild(newP);
         })
        
