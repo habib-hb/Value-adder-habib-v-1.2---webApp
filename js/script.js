@@ -14,7 +14,7 @@ form.addEventListener('submit', (e)=>{//form submission handler;
     obj[key] = value;
   })
   console.log(obj);
-  storedComments.push(obj);
+  storedComments.unshift(obj);
   localStorage.setItem('formData', JSON.stringify(storedComments));
 })//form submission handler -----END;
 
@@ -28,7 +28,17 @@ setInterval(()=>{
         storedComments.forEach((comment , i)=>{
         let newP= document.createElement('p');
          newP.classList.add('comment-p');
-         newP.innerHTML=`<p class="single-comments">Commenter No.${i}: ${comment.name}---;</p>`
+         newP.innerHTML=`
+         <hr>
+            <div class="single-comments">
+            <h2>Comment No.${i+1}</h2>
+         <p>Commenter's Name: ${comment.name}.</p>
+         <p>Commenter's E-mail: ${comment.email}.</p>
+         <p>Commenter's Phone: ${comment.phone}.</p>
+         <p>Commenter's Comment: ${comment.text}.</p>
+            </div>
+            <hr>
+         `
          comments.appendChild(newP);
         })
        
