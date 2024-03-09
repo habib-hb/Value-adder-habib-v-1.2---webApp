@@ -132,7 +132,6 @@
 
     #form {
         max-width: 88%;
-    
     }
 
     .btn-submit{
@@ -147,19 +146,12 @@
     }
 
     .contact{
-        margin-left: -1.9vh;
+        background-color: aqua;
     }
 
 
 }
 
-@media screen and (max-width: 550px){
-    .contact{
-        margin-left: -2.9vh;
-        padding: 5px;
-    }
- 
-}
 
 
 
