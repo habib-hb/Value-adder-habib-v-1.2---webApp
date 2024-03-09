@@ -1,6 +1,6 @@
 const form = document.getElementById('form');
 const comments = document.querySelector(".comments");
-const storedComments = JSON.parse(localStorage.getItem('formData')) || [] ;
+let storedComments = JSON.parse(localStorage.getItem('formData')) || [] ;
 
 
 
@@ -21,6 +21,19 @@ form.addEventListener('submit', (e)=>{//form submission handler;
 
 let initialArrayLengthChecker = storedComments.length;
 let firstLoad=true;
+let deleteComment = (text)=>{ 
+      console.log(text);
+     storedComments = storedComments.filter((comment)=>{
+        return comment.text !== text;
+      })
+      console.log(storedComments)
+      firstLoad = true;
+}
+
+// let deleteComment =(text)=>{
+//   return console.log("Click worked " + text);
+// }
+
 setInterval(()=>{
     if(initialArrayLengthChecker < storedComments.length || firstLoad){
         comments.innerHTML="";
@@ -36,6 +49,7 @@ setInterval(()=>{
          <p>Commenter's E-mail: ${comment.email}.</p>
          <p>Commenter's Phone: ${comment.phone}.</p>
          <p>Commenter's Comment: ${comment.text}.</p>
+         <input type="submit" value="Delete" onclick="deleteComment('${comment.text}')">
             </div>
             <hr>
          `
