@@ -36,6 +36,7 @@ let deleteComment = (text)=>{
 
 setInterval(()=>{
     if(initialArrayLengthChecker < storedComments.length || firstLoad){
+      localStorage.setItem('formData', JSON.stringify(storedComments));
         comments.innerHTML="";
     if (storedComments) {//Showing on the document
         storedComments.forEach((comment , i)=>{
@@ -45,10 +46,10 @@ setInterval(()=>{
          <hr>
             <div class="single-comments">
             <h2>Comment No.${i+1}</h2>
-         <p>Commenter's Name: ${comment.name}.</p>
-         <p>Commenter's E-mail: ${comment.email}.</p>
-         <p>Commenter's Phone: ${comment.phone}.</p>
-         <p>Commenter's Comment: ${comment.text}.</p>
+         <p><b>Commenter's Name: </b>${comment.name}.</p>
+         <p><b>Commenter's E-mail: </b>${comment.email}.</p>
+         <p><b>Commenter's Phone: </b>${comment.phone}.</p>
+         <p><b>Commenter's Comment: </b>${comment.text}.</p>
          <input type="submit" value="Delete" onclick="deleteComment('${comment.text}')">
             </div>
             <hr>
