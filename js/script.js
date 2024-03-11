@@ -21,13 +21,17 @@ form.addEventListener('submit', (e)=>{//form submission handler;
 
 let initialArrayLengthChecker = storedComments.length;
 let firstLoad=true;
-let deleteComment = (text)=>{ 
+let justOneDeleteCheck = 0;
+let deleteComment = (name , email , phone , text)=>{ // , email , phone , text
       console.log(text);
+      
      storedComments = storedComments.filter((comment)=>{
-        return comment.text !== text;
+      justOneDeleteCheck = comment.name === name && comment.email === email && comment.phone === phone && comment.text === text ? justOneDeleteCheck + 1 : justOneDeleteCheck;
+        return comment.name === name && comment.email === email && comment.phone === phone && comment.text === text &&justOneDeleteCheck===1 ? false : true;
       })
       console.log(storedComments)
       firstLoad = true;
+      justOneDeleteCheck = 0;
 }
 
 // let deleteComment =(text)=>{
@@ -50,11 +54,12 @@ setInterval(()=>{
          <p><b>Commenter's E-mail: </b>${comment.email}.</p>
          <p><b>Commenter's Phone: </b>${comment.phone}.</p>
          <p><b>Commenter's Comment: </b>${comment.text}.</p>
-         <input type="submit" value="Delete" onclick="deleteComment('${comment.text}')">
+         <input type="submit" value="Delete" onclick="deleteComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
             </div>
             <hr>
          `
          comments.appendChild(newP);
+    
         })
        
     }//Showing on the document -----END
@@ -63,3 +68,5 @@ setInterval(()=>{
     initialArrayLengthChecker = storedComments.length;
 }, 500)
 
+
+//  , '${comment.email}' , '${comment.phone}' , '${comment.text}'
