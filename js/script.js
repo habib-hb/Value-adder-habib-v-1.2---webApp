@@ -1,12 +1,16 @@
 const form = document.getElementById('form');
 const comments = document.querySelector(".comments");
 let storedComments = JSON.parse(localStorage.getItem('formData')) || [] ;
-
+// let duplicateCommentAlert = false;
+let duplicateCommentAlertEl= document.createElement("p");
 
 
 form.addEventListener('submit', (e)=>{//form submission handler;
   e.preventDefault();
-
+ //clearing duplicate error alertelement------
+  duplicateCommentAlertEl.innerHTML && form.removeChild(duplicateCommentAlertEl);
+  duplicateCommentAlertEl.innerHTML="";
+  //------
   const formData = new FormData(form);
   console.log(typeof formData);
   const obj = {};
@@ -14,6 +18,17 @@ form.addEventListener('submit', (e)=>{//form submission handler;
     obj[key] = value;
   })
   console.log(obj);
+  
+  if(storedComments.find((comment)=> comment.name === obj.name && comment.email === obj.email && comment.phone === obj.phone && comment.text === obj.text)){
+    // alert("Comment already exists");
+    // duplicateCommentAlert = true;
+    duplicateCommentAlertEl.innerHTML="<hr>The Comment Already Exists.<br><hr><br>";
+    duplicateCommentAlertEl.style.textAlign = "center";
+    duplicateCommentAlertEl.style.fontSize = "20px";
+    duplicateCommentAlertEl.style.color = "red";
+    form.appendChild(duplicateCommentAlertEl);
+    return;
+  }
   storedComments.unshift(obj);
   localStorage.setItem('formData', JSON.stringify(storedComments));
 })//form submission handler -----END;
@@ -39,6 +54,12 @@ let deleteComment = (name , email , phone , text)=>{ // , email , phone , text
 // }
 
 setInterval(()=>{
+  //duplicate Comment alert----
+  // if(duplicateCommentAlert){
+  //   alert("Comment already exists");
+  //   duplicateCommentAlert = false;
+  // } 
+  //-----
     if(initialArrayLengthChecker < storedComments.length || firstLoad){
       localStorage.setItem('formData', JSON.stringify(storedComments));
         comments.innerHTML="";
