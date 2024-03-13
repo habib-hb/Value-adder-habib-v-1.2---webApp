@@ -19,9 +19,13 @@ form.addEventListener('submit', (e)=>{//form submission handler;
   })
   console.log(obj);
   
+  //Clearing Form Input Elements------
+  form.reset();
+  //------
+
+
+  //duplicate Comment alert----
   if(storedComments.find((comment)=> comment.name === obj.name && comment.email === obj.email && comment.phone === obj.phone && comment.text === obj.text)){
-    // alert("Comment already exists");
-    // duplicateCommentAlert = true;
     duplicateCommentAlertEl.innerHTML="<hr>The Comment Already Exists.<br><hr><br>";
     duplicateCommentAlertEl.style.textAlign = "center";
     duplicateCommentAlertEl.style.fontSize = "20px";
@@ -29,6 +33,32 @@ form.addEventListener('submit', (e)=>{//form submission handler;
     form.appendChild(duplicateCommentAlertEl);
     return;
   }
+
+  //maximum comments had already reached for a user alert-----
+    const userTotalComments = storedComments.filter((comment)=> comment.name === obj.name && comment.email === obj.email && comment.phone === obj.phone);
+    if(userTotalComments.length === 3){
+      duplicateCommentAlertEl.innerHTML="<hr>The Comment Can't Be Added. The User Had Already Reached Maximum Comments(3).<br><hr><br>";
+      duplicateCommentAlertEl.style.textAlign = "center";
+      duplicateCommentAlertEl.style.fontSize = "20px";
+      duplicateCommentAlertEl.style.color = "red";
+      form.appendChild(duplicateCommentAlertEl);
+      return;
+    } 
+
+  //-----
+
+  //maximum comments reached for a user alert-----
+  if(userTotalComments.length === 2){
+    duplicateCommentAlertEl.innerHTML="<hr>The User Has Reached Maximum Comments(3). Further Comments Won't Be Added.<br><hr><br>";
+    duplicateCommentAlertEl.style.textAlign = "center";
+    duplicateCommentAlertEl.style.fontSize = "20px";
+    duplicateCommentAlertEl.style.color = "blue";
+    form.appendChild(duplicateCommentAlertEl);
+    
+  } 
+
+//-----
+
   storedComments.unshift(obj);
   localStorage.setItem('formData', JSON.stringify(storedComments));
 })//form submission handler -----END;
