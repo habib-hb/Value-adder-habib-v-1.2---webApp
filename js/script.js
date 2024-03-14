@@ -59,6 +59,20 @@ form.addEventListener('submit', (e)=>{//form submission handler;
 
 //-----
 
+//duplicate number alert- if the submitted number exists already and the name or the email field doesn't match, the show an alert message--------
+  if(storedComments.find((comment)=> comment.phone === obj.phone && (comment.name !== obj.name || comment.email !== obj.email))){
+    duplicateCommentAlertEl.innerHTML="<hr>The Number Already Exists.<br><hr><br>";
+    duplicateCommentAlertEl.style.textAlign = "center";
+    duplicateCommentAlertEl.style.fontSize = "20px";
+    duplicateCommentAlertEl.style.color = "red";
+    form.appendChild(duplicateCommentAlertEl);
+    return;
+  }
+
+  //-------
+
+
+
   storedComments.unshift(obj);
   localStorage.setItem('formData', JSON.stringify(storedComments));
 })//form submission handler -----END;
