@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/image-slider.css"><!--4/3 edition-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/search-dropdown.css">
     
     <title>Portfolio - ValueAdderHabib</title>
     
@@ -24,7 +25,15 @@
         </div>
         </ul>
         <div class="rightNav v-class-resp">
-            <input type="text" name="search" id="search" placeholder="...">
+            <!-- <input type="text" name="search" id="search" placeholder="..."> -->
+            <div class="dropdown">
+                <input type="text" name="search" id="search" placeholder="...">
+            <div class="dropdown-content" id="searchOptions">
+                <a href="#about">About</a><hr>
+                <a href="#services">Services</a><hr>
+                <a href="#contact">Contact Us</a>
+            </div>
+            </div>
             <button class="btn btn-sm" id="search-btn">Search</button>
         </div>
         <div class="burger">
