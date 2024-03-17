@@ -149,6 +149,15 @@
 
 }
 
+@media screen and (min-width: 1141px) and (max-width: 1280px){
+    #search{
+        width: 60%;
+    }
+    #search-btn{
+        /* width: 30%; */
+    }
+}
+
 
 
 
