@@ -1,8 +1,12 @@
 const form = document.getElementById('form');
 const comments = document.querySelector(".comments");
 let storedComments = JSON.parse(localStorage.getItem('formData')) || [] ;
+let firstLoad=true;
 // let duplicateCommentAlert = false;
 let duplicateCommentAlertEl= document.createElement("p");
+let editCommentMode = false;
+let editComment_previouseComment = {};
+
 
 
 form.addEventListener('submit', (e)=>{//form submission handler;
@@ -33,6 +37,18 @@ form.addEventListener('submit', (e)=>{//form submission handler;
     form.appendChild(duplicateCommentAlertEl);
     return;
   }
+
+  //Edit Comment handling-----
+    if(editCommentMode){
+      // [Note] If the comment remained unedited and submitted again, the dupicate alert section will kick in and skip the whole function. So we don't need to check for that. Also, this edit handling section will kick in before the maximum alert functionalities. So we don't need to check for that either. :) 
+      let filteringEditComment = storedComments.filter((comment)=>{
+        return comment.name === editComment_previouseComment.name && comment.email === editComment_previouseComment.email && comment.phone === editComment_previouseComment.phone && comment.text === editComment_previouseComment.text ? false : true;
+      })
+      storedComments = filteringEditComment;
+      editCommentMode = false;
+      editComment_previouseComment = {};
+      firstLoad = true;
+    }
 
   //maximum comments had already reached for a user alert-----
     const userTotalComments = storedComments.filter((comment)=> comment.name === obj.name && comment.email === obj.email && comment.phone === obj.phone);
@@ -79,7 +95,7 @@ form.addEventListener('submit', (e)=>{//form submission handler;
 
 
 let initialArrayLengthChecker = storedComments.length;
-let firstLoad=true;
+
 let justOneDeleteCheck = 0;
 let deleteComment = (name , email , phone , text)=>{ // , email , phone , text
       console.log(text);
@@ -91,6 +107,27 @@ let deleteComment = (name , email , phone , text)=>{ // , email , phone , text
       console.log(storedComments)
       firstLoad = true;
       justOneDeleteCheck = 0;
+}
+
+let editComment = (name , email , phone , text)=>{
+    let formName = document.getElementById('name');
+    let formEmail = document.getElementById('email');
+    let formPhone = document.getElementById('phone');
+    let formText = document.getElementById('text');
+    formName.value = name;
+    formEmail.value = email;
+    formPhone.value = phone;
+    formText.value = text;
+    
+    editCommentMode = true;
+    editComment_previouseComment = {
+        name : name,
+        email : email,
+        phone : phone,
+        text : text
+    }
+
+    window.location = '#contact';
 }
 
 // let deleteComment =(text)=>{
@@ -120,6 +157,10 @@ setInterval(()=>{
          <p><b>Commenter's Phone: </b>${comment.phone}.</p>
          <p><b>Commenter's Comment: </b>${comment.text}.</p>
          <input type="submit" value="Delete" onclick="deleteComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
+        
+         <input type="submit" value="Edit" onclick="editComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
+
+        
             </div>
             <hr>
          `
