@@ -3,7 +3,7 @@ const comments = document.querySelector(".comments");
 let storedComments = JSON.parse(localStorage.getItem('formData')) || [] ;
 let firstLoad=true;
 // let duplicateCommentAlert = false;
-let duplicateCommentAlertEl= document.createElement("p");
+let commentAlertEl= document.createElement("p");
 let editCommentMode = false;
 let editComment_previouseComment = {};
 
@@ -12,8 +12,8 @@ let editComment_previouseComment = {};
 form.addEventListener('submit', (e)=>{//form submission handler;
   e.preventDefault();
  //clearing duplicate error alertelement------
-  duplicateCommentAlertEl.innerHTML && form.removeChild(duplicateCommentAlertEl);
-  duplicateCommentAlertEl.innerHTML="";
+  commentAlertEl.innerHTML && form.removeChild(commentAlertEl);
+  commentAlertEl.innerHTML="";
   //------
   const formData = new FormData(form);
   console.log(typeof formData);
@@ -23,20 +23,39 @@ form.addEventListener('submit', (e)=>{//form submission handler;
   })
   console.log(obj);
   
-  //Clearing Form Input Elements------
-  form.reset();
-  //------
+  
 
+
+  //unwanted charecters found in input alert
+  let unwantedCharecters= [')' , '(' , '\\' , '/' , '{' , '}' , '[' , ']'];
+  let unwantedCharectersFound = false;
+   unwantedCharecters.forEach((char)=>{
+    if(obj.name.includes(char) || obj.email.includes(char) || obj.phone.includes(char) || obj.text.includes(char)){
+      commentAlertEl.innerHTML="<hr>The Comment Contains Unwanted Charecters. Please Remove (eg- ')' , '(' , '\\' , '/' , '{' , '}' , '[' , ']').<br><hr><br>";
+      commentAlertEl.style.textAlign = "center";
+      commentAlertEl.style.fontSize = "20px";
+      commentAlertEl.style.color = "red";
+      form.appendChild(commentAlertEl);
+
+      unwantedCharectersFound = true;
+      return;
+    }
+   })
+   if(unwantedCharectersFound) return;
 
   //duplicate Comment alert----
   if(storedComments.find((comment)=> comment.name === obj.name && comment.email === obj.email && comment.phone === obj.phone && comment.text === obj.text)){
-    duplicateCommentAlertEl.innerHTML="<hr>The Comment Already Exists.<br><hr><br>";
-    duplicateCommentAlertEl.style.textAlign = "center";
-    duplicateCommentAlertEl.style.fontSize = "20px";
-    duplicateCommentAlertEl.style.color = "red";
-    form.appendChild(duplicateCommentAlertEl);
+    commentAlertEl.innerHTML="<hr>The Comment Already Exists.<br><hr><br>";
+    commentAlertEl.style.textAlign = "center";
+    commentAlertEl.style.fontSize = "20px";
+    commentAlertEl.style.color = "red";
+    form.appendChild(commentAlertEl);
     return;
   }
+
+  //Clearing Form Input Elements------
+  form.reset(); //[Note] I have put this function here because it's the correct position to execute it considering the rechangebility of comments for users. As it executes after unwanted and duplicate comments alert functionality. 
+  //------
 
   //Edit Comment handling-----
     if(editCommentMode){
@@ -53,11 +72,11 @@ form.addEventListener('submit', (e)=>{//form submission handler;
   //maximum comments had already reached for a user alert-----
     const userTotalComments = storedComments.filter((comment)=> comment.name === obj.name && comment.email === obj.email && comment.phone === obj.phone);
     if(userTotalComments.length === 3){
-      duplicateCommentAlertEl.innerHTML="<hr>The Comment Can't Be Added. The User Had Already Reached Maximum Comments(3).<br><hr><br>";
-      duplicateCommentAlertEl.style.textAlign = "center";
-      duplicateCommentAlertEl.style.fontSize = "20px";
-      duplicateCommentAlertEl.style.color = "red";
-      form.appendChild(duplicateCommentAlertEl);
+      commentAlertEl.innerHTML="<hr>The Comment Can't Be Added. The User Had Already Reached Maximum Comments(3).<br><hr><br>";
+      commentAlertEl.style.textAlign = "center";
+      commentAlertEl.style.fontSize = "20px";
+      commentAlertEl.style.color = "red";
+      form.appendChild(commentAlertEl);
       return;
     } 
 
@@ -65,11 +84,11 @@ form.addEventListener('submit', (e)=>{//form submission handler;
 
   //maximum comments reached for a user alert-----
   if(userTotalComments.length === 2){
-    duplicateCommentAlertEl.innerHTML="<hr>The User Has Reached Maximum Comments(3). Further Comments Won't Be Added.<br><hr><br>";
-    duplicateCommentAlertEl.style.textAlign = "center";
-    duplicateCommentAlertEl.style.fontSize = "20px";
-    duplicateCommentAlertEl.style.color = "blue";
-    form.appendChild(duplicateCommentAlertEl);
+    commentAlertEl.innerHTML="<hr>The User Has Reached Maximum Comments(3). Further Comments Won't Be Added.<br><hr><br>";
+    commentAlertEl.style.textAlign = "center";
+    commentAlertEl.style.fontSize = "20px";
+    commentAlertEl.style.color = "blue";
+    form.appendChild(commentAlertEl);
     
   } 
 
@@ -77,11 +96,11 @@ form.addEventListener('submit', (e)=>{//form submission handler;
 
 //duplicate number alert- if the submitted number exists already and the name or the email field doesn't match, the show an alert message--------
   if(storedComments.find((comment)=> comment.phone === obj.phone && (comment.name !== obj.name || comment.email !== obj.email))){
-    duplicateCommentAlertEl.innerHTML="<hr>The Number Already Exists.<br><hr><br>";
-    duplicateCommentAlertEl.style.textAlign = "center";
-    duplicateCommentAlertEl.style.fontSize = "20px";
-    duplicateCommentAlertEl.style.color = "red";
-    form.appendChild(duplicateCommentAlertEl);
+    commentAlertEl.innerHTML="<hr>The Number Already Exists.<br><hr><br>";
+    commentAlertEl.style.textAlign = "center";
+    commentAlertEl.style.fontSize = "20px";
+    commentAlertEl.style.color = "red";
+    form.appendChild(commentAlertEl);
     return;
   }
 
