@@ -13,7 +13,7 @@ galleryImageDivs.forEach(div => {
         // Blur other images
         galleryImageDivs.forEach(otherDiv => {
             if (otherDiv !== div) {
-                otherDiv.style.filter = 'blur(3px)';
+                otherDiv.style.filter = 'blur(2px)';
             }
         });
         
