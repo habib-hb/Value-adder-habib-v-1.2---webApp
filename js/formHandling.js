@@ -167,22 +167,39 @@ setInterval(()=>{
         storedComments.forEach((comment , i)=>{
         let newP= document.createElement('p');
          newP.classList.add('comment-p');
-         newP.innerHTML=`
-         <hr>
-            <div class="single-comments">
-            <h2>Comment No.${i+1}</h2>
-         <p><b>Commenter's Name: </b>${comment.name}.</p>
-         <p><b>Commenter's E-mail: </b>${comment.email}.</p>
-         <p><b>Commenter's Phone: </b>${comment.phone}.</p>
-         <p><b>Commenter's Comment: </b>${comment.text}.</p>
-         <input type="submit" value="Delete" onclick="deleteComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
+        //  newP.innerHTML=`
+        //  <hr>
+        //     <div class="single-comments">
+        //     <h2>Comment No.${i+1}</h2>
+        //  <p><b>Commenter's Name: </b></td><td>${comment.name}.</td></p>
+        //  <p><b>Commenter's E-mail: </b></td><td>${comment.email}.</td></p>
+        //  <p><b>Commenter's Phone: </b>${comment.phone}.</p>
+        //  <p><b>Commenter's Comment: </b>${comment.text}.</p>
+        //  <input type="submit" value="Delete" onclick="deleteComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
         
-         <input type="submit" value="Edit" onclick="editComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
+        //  <input type="submit" value="Edit" onclick="editComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
 
         
-            </div>
-            <hr>
-         `
+        //     </div>
+        //     <hr>
+        //  `
+        newP.innerHTML=`
+        <div class="single-comment-section">
+    <hr>
+    <div class="single-comments">
+        <h2>Comment No.${i+1}</h2>
+        <p><b>Commenter's Name:</b> ${comment.name}.</p>
+        <p><b>Commenter's E-mail:</b> ${comment.email}.</p>
+        <p><b>Commenter's Phone:</b> ${comment.phone}.</p>
+        <p><b>Commenter's Comment:</b> ${comment.text}.</p>
+        <div class="button-container">
+            <input type="submit" value="Delete" onclick="deleteComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
+            <input type="submit" value="Edit" onclick="editComment('${comment.name}' , '${comment.email}' , '${comment.phone}' , '${comment.text}')">
+        </div>
+    </div>
+    <hr>
+    </div>
+`;
          comments.appendChild(newP);
     
         })
