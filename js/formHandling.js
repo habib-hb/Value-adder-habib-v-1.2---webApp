@@ -189,7 +189,7 @@ setInterval(()=>{
     <div class="single-comments">
         <h2>Comment No.${i+1}</h2>
         <p><b>Commenter's Name:</b> ${comment.name}.</p>
-        <p><b>Commenter's E-mail:</b> ${comment.email}.</p>
+        <p><b>Commenter's E-mail:</b><span> ${comment.email.slice(0, 30).length < comment.email.length ? comment.email.slice(0, 30) + "..." : comment.email}.</span></p>
         <p><b>Commenter's Phone:</b> ${comment.phone}.</p>
         <p><b>Commenter's Comment:</b> ${comment.text}.</p>
         <div class="button-container">

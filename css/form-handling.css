@@ -3,6 +3,7 @@
 .single-comment-section {
     display: flex;
     justify-content: center;
+    
 }
 .single-comments {
     display: flex;
@@ -15,7 +16,16 @@
 .single-comments p {
     display: flex;
     align-items: center;
+
+    
 }
+/* 
+.single-comments p span{
+    display: flex;
+    max-width: 100px;
+    flex-wrap: wrap;
+    
+} */
 .single-comments b {
     flex: 0 0 auto;
     width: 300px; /* Adjust as needed */
