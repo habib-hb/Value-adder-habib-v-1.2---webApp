@@ -211,7 +211,89 @@
     
     <script src="js/image-slider.js"></script>
     <script src="js/resp.js"></script>
-    <script src="js/formHandling.js"></script>
+
+
+    <!-- <script src="js/formHandling.js"></script> -->
+
+
+
+    <script>
+        document.getElementById('form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+    
+            const formData = new FormData(this);
+            const formObj = {};
+            formData.forEach((value, key) => formObj[key] = value);
+    
+            try {
+                const response = await fetch('/api/comments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObj)
+                });
+    
+                if (response.ok) {
+                    console.log('Data submitted successfully');
+                    // You can perform any additional actions here, like showing a success message
+                } else {
+                    console.error('Failed to submit data');
+                    // Handle error cases, show error message to the user, etc.
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Handle error cases, show error message to the user, etc.
+            }
+        });
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', async function() {
+        // Fetch comments from the backend API
+        try {
+            const response = await fetch('/api/comments');
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+            const comments = await response.json();
+            displayComments(comments);
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error cases, show error message to the user, etc.
+        }
+    });
+
+    // Function to display comments in the HTML section
+    function displayComments(comments) {
+        const commentsSection = document.querySelector('.comments');
+        commentsSection.innerHTML = ''; // Clear existing content
+        
+        comments.forEach((comment, index) => {
+            const commentContainer = document.createElement('div');
+            commentContainer.classList.add('comment');
+            
+            // Create HTML structure for comment
+            commentContainer.innerHTML = `
+                <div class="comment-header">
+                    <h3>Comment No.${index + 1}</h3>
+                    <p><strong>Name:</strong> ${comment.name}</p>
+                    <p><strong>Email:</strong> ${comment.email}</p>
+                    <p><strong>Phone:</strong> ${comment.phone}</p>
+                </div>
+                <div class="comment-body">
+                    <p>${comment.text}</p>
+                </div>
+            `;
+            
+            commentsSection.appendChild(commentContainer);
+        });
+    }
+    </script>
+
+
     <script src="js/searchHandling.js"></script>
     <script src="js/logoClickRedirection.js"></script>
     <script src="js/image-gallary-section.js"></script>
