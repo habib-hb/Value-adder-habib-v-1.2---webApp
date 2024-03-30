@@ -300,3 +300,106 @@
 </body>
 
 </html>
+
+<!-- tries new stuff -->
+
+<!-- document.addEventListener('DOMContentLoaded', async function() {
+    // Fetch comments from the backend API
+    try {
+        const response = await fetch('/api/comments');
+        if (!response.ok) {
+            throw new Error('Failed to fetch comments');
+        }
+        const comments = await response.json();
+        displayComments(comments);
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error cases, show error message to the user, etc.
+    }
+});
+
+// Function to display comments in the HTML section
+function displayComments(comments) {
+    const commentsSection = document.querySelector('.comments');
+    commentsSection.innerHTML = ''; // Clear existing content
+    
+    comments.forEach((comment, index) => {
+        const commentContainer = document.createElement('div');
+        commentContainer.classList.add('comment');
+        
+        // Create HTML structure for comment
+        commentContainer.innerHTML = `
+            <div class="comment-header">
+                <h3>Comment No.${index + 1}</h3>
+                <p><strong>Name:</strong> ${comment.name}</p>
+                <p><strong>Email:</strong> ${comment.email}</p>
+                <p><strong>Phone:</strong> ${comment.phone}</p>
+            </div>
+            <div class="comment-body">
+                <p>${comment.text}</p>
+            </div>
+            <div class="comment-actions">
+                <button class="btn-edit" data-id="${comment._id}">Edit</button>
+                <button class="btn-delete" data-id="${comment._id}">Delete</button>
+            </div>
+        `;
+        
+        commentsSection.appendChild(commentContainer);
+    });
+
+    // Add event listeners for edit and delete buttons
+    document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', editComment);
+    });
+
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', deleteComment);
+    });
+}
+
+// Function to handle editing a comment
+async function editComment(event) {
+    const commentId = event.target.dataset.id;
+
+    // Fetch the comment details
+    try {
+        const response = await fetch(`/api/comments/${commentId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch comment for editing');
+        }
+        const comment = await response.json();
+
+        // Populate the form with comment data for editing
+        document.getElementById('name').value = comment.name;
+        document.getElementById('email').value = comment.email;
+        document.getElementById('phone').value = comment.phone;
+        document.getElementById('text').value = comment.text;
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error cases, show error message to the user, etc.
+    }
+}
+
+// Function to handle deleting a comment
+async function deleteComment(event) {
+    const commentId = event.target.dataset.id;
+
+    // Confirm deletion with the user
+    const confirmDelete = confirm('Are you sure you want to delete this comment?');
+    if (!confirmDelete) return;
+
+    // Delete the comment
+    try {
+        const response = await fetch(`/api/comments/${commentId}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error('Failed to delete comment');
+        }
+        // Reload comments after deletion
+        location.reload();
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error cases, show error message to the user, etc.
+    }
+} -->
