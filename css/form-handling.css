@@ -3,13 +3,13 @@
 .single-comment-section {
     display: flex;
     justify-content: center;
-    
+    /* border: 1px solid #ccc; */
 }
 .single-comments {
     display: flex;
     flex-direction: column;
     width: 600px; /* Set an even wider width */
-    border: 1px solid #ccc; /* Optional: Add border for visualization */
+    border: 1px solid #686666; /* Optional: Add border for visualization */
     padding: 10px;
     
 }
