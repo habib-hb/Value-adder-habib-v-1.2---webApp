@@ -81,7 +81,7 @@ comments.forEach((comment, index) => {
             <p><b>Commenter's Phone:</b> ${comment.phone}.</p>
         
         <div class="comment-body">
-            <h3>Comment:</h3><hr style='opacity:0.5'>
+            <h3>Comment</h3><hr style='opacity:0.5'>
             <p style='justify-content:center'>${comment.text}</p>
         </div>
         <div class="button-container">
