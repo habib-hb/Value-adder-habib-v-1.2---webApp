@@ -119,22 +119,45 @@ throw new Error(`Failed to fetch comment details: ${err.message}`);
 // Create a form dynamically to edit the comment
 const form = document.createElement('form');
 form.innerHTML = `
-<label for="edit-name">Name:</label>
-<input type="text" id="edit-name" name="name" value="${comment.name}"><br><br>
-<label for="edit-email">Email:</label>
-<input type="email" id="edit-email" name="email" value="${comment.email}"><br><br>
-<label for="edit-phone">Phone:</label>
-<input type="text" id="edit-phone" name="phone" value="${comment.phone}"><br><br>
-<label for="edit-text">Text:</label>
-<textarea id="edit-text" name="text">${comment.text}</textarea><br><br>
-<button type="button" onclick="updateComment('${commentId}')">Update</button>
+    <button type="button" id="close-icon-btn">X</button> 
+    <label for="edit-name">Name:</label>
+    <input type="text" id="edit-name" name="name" value="${comment.name}"><br><br>
+    <label for="edit-email">Email:</label>
+    <input type="email" id="edit-email" name="email" value="${comment.email}"><br><br>
+    <label for="edit-phone">Phone:</label>
+    <input type="text" id="edit-phone" name="phone" value="${comment.phone}"><br><br>
+    <label for="edit-text">Text:</label>
+    <textarea id="edit-text" name="text">${comment.text}</textarea><br><br>
+    <button type="button" onclick="updateComment('${commentId}')">Update</button>
+    <button type="button" id="close-btn">Cancel</button> <!-- Close button -->
 `;
+form.setAttribute('class', 'edit-form');
 
 // Display the form in a dialog box
 const dialog = document.createElement('dialog');
+dialog.setAttribute('class', 'dialog-form');
 dialog.appendChild(form);
 document.body.appendChild(dialog);
 dialog.showModal();
+
+// Close button functionality
+const closeBtn = form.querySelector('#close-btn');
+closeBtn.addEventListener('click', () => {
+    dialog.close(); // Close the dialog box when the close button is clicked
+});
+
+// Close button functionality
+const closeIconBtn = form.querySelector('#close-icon-btn');
+closeIconBtn.addEventListener('click', () => {
+    dialog.close(); // Close the dialog box when the close button is clicked
+});
+
+// Close dialog box when clicking outside the dialog
+dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+        dialog.close();
+    }
+});
 }
 
 function updateComment(commentId) {
