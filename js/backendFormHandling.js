@@ -16,7 +16,65 @@ document.getElementById('form').addEventListener('submit', async function(event)
 
         if (response.ok) {
             console.log('Data submitted successfully');
-            // You can perform any additional actions here, like showing a success message
+            // Clear form fields
+            this.reset();
+            // Show success message
+            const successMessage = document.createElement('p');
+            successMessage.textContent = 'Comment submission was successful.';
+            successMessage.style.color = 'blue';
+            successMessage.style.textAlign = 'center';
+            this.appendChild(successMessage);
+           
+
+            //last comment extraction ------
+
+            // Function to fetch the last comment from the backend and render it
+async function fetchAndRenderLastComment() {
+    try {
+        const response = await fetch('/api/comments/last');
+        if (!response.ok) {
+            throw new Error('Failed to fetch last comment');
+        }
+        const lastComment = await response.json();
+        if (lastComment) {
+            const commentContainer = document.createElement('div');
+            commentContainer.classList.add('comment');
+            
+            commentContainer.innerHTML = `
+                <div class="single-comment-section">
+                    <hr>
+                    <div class="single-comments">
+                        <h2>Comment No.${document.querySelectorAll(".comment").length + 1}</h2>
+                        <p><b>Commenter's Name:</b> ${lastComment.name}.</p>
+                        <p><b>Commenter's E-mail:</b><span> ${lastComment.email.slice(0, 30).length < lastComment.email.length ? lastComment.email.slice(0, 30) + "..." : lastComment.email}.</span></p>
+                        <p><b>Commenter's Phone:</b> ${lastComment.phone}.</p>
+                    
+                        <div class="comment-body">
+                            <h3>Comment</h3><hr style='opacity:0.5'>
+                            <p style='justify-content:center'>${lastComment.text}</p>
+                        </div>
+                        <div class="button-container">
+                            <button class="edit-comment-btn" onclick="editComment('${lastComment._id}')">Edit</button>
+                            <button class="delete-comment-btn" onclick="deleteComment('${lastComment._id}')">Delete</button>
+                        </div>
+                    </div>
+                    <hr style='opacity:1'>
+                </div><br>
+            `;
+    
+            document.querySelector('.comments').appendChild(commentContainer);
+        } else {
+            console.log('No last comment found.');
+        }
+    } catch (error) {
+        console.error('Error fetching and rendering last comment:', error);
+    }
+}
+
+            fetchAndRenderLastComment();
+
+            //------
+
         } else {
             console.error('Failed to submit data');
             // Handle error cases, show error message to the user, etc.
@@ -55,21 +113,6 @@ comments.forEach((comment, index) => {
     const commentContainer = document.createElement('div');
     commentContainer.classList.add('comment');
     
-    // commentContainer.innerHTML = `
-    //     <div class="comment-header">
-    //         <h3>Comment No.${index + 1}</h3>
-    //         <p><strong>Name:</strong> ${comment.name}</p>
-    //         <p><strong>Email:</strong> ${comment.email}</p>
-    //         <p><strong>Phone:</strong> ${comment.phone}</p>
-    //     </div>
-    //     <div class="comment-body">
-    //         <p>${comment.text}</p>
-    //     </div>
-    //     <div class="comment-actions">
-    //         <button class="edit-comment-btn" onclick="editComment('${comment._id}')">Edit</button>
-    //         <button class="delete-comment-btn" onclick="deleteComment('${comment._id}')">Delete</button>
-    //     </div>
-    // `;
 
     commentContainer.innerHTML = `
     <div class="single-comment-section">
