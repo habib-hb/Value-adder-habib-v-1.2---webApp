@@ -31,3 +31,12 @@
     background-color: aliceblue;
     border: 2px solid rgb(229, 24, 14);
 }
+
+@media screen and (max-width: 768px) {
+    .dialog-form{
+        width: 100%;
+        margin: auto;
+        padding: 24px 0px;
+        text-align: center;
+    }
+}
